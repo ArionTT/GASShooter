@@ -1,5 +1,11 @@
 # GASShooter
 
+## 迁移信息
+项目已经简单从UE4.27迁移到UE5.3,不过其中乱改有些bug，比如枪械无法开枪，后续再看如何修复了。学习中....
+
+## Migration Notes
+The project has been simply migrated from UE4.27 to UE5.3. However, there are some bugs due to messy modifications, such as guns failing to fire. We'll look into how to fix these issues later. Learning in progress...
+
 ## Introduction
 
 GASShooter is an advanced FPS/TPS Sample Project for Unreal Engine 4's GameplayAbilitySystem (GAS) plugin. This is a sister project to the [GASDocumentation](https://github.com/tranek/GASDocumentation) and information about the techniques demonstrated here will be discussed in detail in the README there.
