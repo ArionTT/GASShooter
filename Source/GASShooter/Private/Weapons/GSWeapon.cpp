@@ -13,6 +13,8 @@
 #include "GSBlueprintFunctionLibrary.h"
 #include "Net/UnrealNetwork.h"
 #include "Player/GSPlayerController.h"
+#include "Net/Core/PropertyConditions/PropertyConditions.h"
+
 
 // Sets default values
 AGSWeapon::AGSWeapon()
@@ -99,8 +101,33 @@ void AGSWeapon::PreReplication(IRepChangedPropertyTracker& ChangedPropertyTracke
 {
 	Super::PreReplication(ChangedPropertyTracker);
 
-	DOREPLIFETIME_ACTIVE_OVERRIDE(AGSWeapon, PrimaryClipAmmo, (IsValid(AbilitySystemComponent) && !AbilitySystemComponent->HasMatchingGameplayTag(WeaponIsFiringTag)));
-	DOREPLIFETIME_ACTIVE_OVERRIDE(AGSWeapon, SecondaryClipAmmo, (IsValid(AbilitySystemComponent) && !AbilitySystemComponent->HasMatchingGameplayTag(WeaponIsFiringTag)));
+	//DOREPLIFETIME_ACTIVE_OVERRIDE(AGSWeapon, PrimaryClipAmmo, (IsValid(AbilitySystemComponent) && !AbilitySystemComponent->HasMatchingGameplayTag(WeaponIsFiringTag)));
+	//DOREPLIFETIME_ACTIVE_OVERRIDE(AGSWeapon, SecondaryClipAmmo, (IsValid(AbilitySystemComponent) && !AbilitySystemComponent->HasMatchingGameplayTag(WeaponIsFiringTag)));
+
+	//// 手动控制是否标记属性为已更改
+	//bool bCanReplicateAmmo = (IsValid(AbilitySystemComponent) && !AbilitySystemComponent->HasMatchingGameplayTag(WeaponIsFiringTag));
+
+	//if (!bCanReplicateAmmo)
+	//{
+	//	// 清除属性的复制标记
+	//	ChangedPropertyTracker.SetCustomIsActiveOverride(FindRepIndex(PrimaryClipAmmo), false);
+	//	ChangedPropertyTracker.SetCustomIsActiveOverride(FindRepIndex(SecondaryClipAmmo), false);
+	//}
+
+	//bool bCanReplicateAmmo = (IsValid(AbilitySystemComponent) && !AbilitySystemComponent->HasMatchingGameplayTag(WeaponIsFiringTag));
+
+	//// 替代方案1：使用条件属性复制
+	//if (bCanReplicateAmmo)
+	//{
+	//	DOREPLIFETIME_CONDITION(AGSWeapon, PrimaryClipAmmo, COND_None);
+	//	DOREPLIFETIME_CONDITION(AGSWeapon, SecondaryClipAmmo, COND_None);
+	//}
+	//else
+	//{
+	//	// 如果需要禁用复制，你可能需要手动设置属性不复制
+	//	// 但通常我们只复制，不需要处理不复制的情况
+	//}
+
 }
 
 void AGSWeapon::SetOwningCharacter(AGSHeroCharacter* InOwningCharacter)

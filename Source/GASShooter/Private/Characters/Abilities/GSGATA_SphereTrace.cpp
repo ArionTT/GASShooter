@@ -80,7 +80,7 @@ void AGSGATA_SphereTrace::SphereTraceWithFilter(TArray<FHitResult>& OutHitResult
 	{
 		FHitResult& Hit = HitResults[HitIdx];
 
-		if (!Hit.Actor.IsValid() || FilterHandle.FilterPassesForActor(Hit.Actor))
+		if (!Hit.HitObjectHandle.IsValid() || FilterHandle.FilterPassesForActor(Hit.HitObjectHandle.GetManagingActor()))
 		{
 			Hit.TraceStart = TraceStart;
 			Hit.TraceEnd = End;
